@@ -1,15 +1,16 @@
 import express from 'express';
 
 const app = express();
+app.use(express.json());
 
 let livros = [
     {
         "id": 1,
-        "name": 'Senhor dos Aneis',
+        "name": "Senhor dos Aneis",
     },
     {
         "id": 2,
-        "name": 'O Hobbit',
+        "name": "O Hobbit",
     }
 ]
 
@@ -19,6 +20,11 @@ app.get("/", (req, res) => {
 
 app.get("/livros", (req, res) => {
     res.status(200).json(livros);
+});
+
+app.post("/livros", (req, res) => {
+    livros.push(req.body);
+    res.status(201).send("Livro cadastrado com sucesso");
 })
 
 export default app;
